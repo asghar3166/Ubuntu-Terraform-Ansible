@@ -1,4 +1,5 @@
-Install Terraform, & Ansible on Ubuntu server
+# Install Terraform, & Ansible on Ubuntu EC2 server AWS Console
+# Launch Ubuntu EC2 instance using AWS console.
 
 # Root Access
 sudo su
