@@ -1,0 +1,93 @@
+Install Terraform, & Ansible on Ubuntu server
+
+# Root Access
+sudo su
+
+# Update
+apt-get update
+
+# DPKG file
+sudo dpkg --configure -a
+
+# Python Pip
+apt install python-pip
+
+# Run an upgrade
+pip install --upgrade pip
+
+# Download Terraform for Ubuntu
+wget https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_linux_amd64.zip
+
+# Make Directory
+mkdir /bin/terraform
+
+# Unzip Terraform zip in (/bin/terraform) directory
+unzip terraform_0.11.1_linux_amd64.zip -d /bin/terraform
+
+ls /bin/terraform
+output: terraform
+
+# Do an Export
+export PATH=$PATCH:/bin/terraform
+
+# Check if Terraform is install
+terraform --version
+
+# Install AWS CLI
+pip install awscli --upgrade
+
+# To check if awscli is install
+aws --version
+
+# Do update again
+apt-get update
+
+# Download software-properties-common
+apt-get install software-properties-common
+
+# Add the repo you need that contain Ansible
+apt-add-repository ppa:ansible/ansible
+
+# Do update
+apt-get update
+
+# Install Ansible
+apt-get install ansible
+
+# Check if Ansible is install
+anisble --version
+
+# Do these steps everytime you log off and log back in, forgetting to do these steps can break the scripts. 
+# Make sure to add those keys to ssh agent
+
+# Generate a key to access the server
+ssh-keygen
+/root/.ssh/kryptonite
+
+# Forward it to ssh agent
+ssh-agent bash
+
+# Add keygen key
+ssh-add ~/.ssh/kryptonite
+
+# Make sure authentication key is there (Note: -l -> L)
+ssh-add -l
+Output: 2048 SHA256:F0rMYYcstzAZ0nOWTB07tphjQHdlu5R9EDIbuuYuAa8 /root/.ssh/kryptonite (RSA)
+
+# Modify Ansible configuration file
+vim /etc/ansible/ansible.cfg
+
+# Search 
+/host
+
+# Insert and disable
+host_key_checking = False
+
+# Create working directory
+mkdir terransible
+
+# Go into this directory
+cd terransible
+
+# Create Terraform files
+touch main.tf variables.tf terraform.tfvars aws_hosts.txt userdata.txt securitygroup.tf
